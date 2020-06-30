@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-12">
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="name">Recipe name</label>
+                        <input type="text" 
+                        id="name" 
+                        class="form-control"
+                        formControlName="name">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="imagePath">Image URL</label>
+                        <input type="text" 
+                        id="imagePath" 
+                        class="form-control"
+                        formControlName="imagePath"
+                        #imagePath>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <img [src]="imagePath.value" alt="" class="img-fluid">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea type="text" id="description" 
+                        class="form-control" rows="3"
+                        formControlName="description"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-7">
+                            <label>Inggredient name</label>
+                        </div>
+                        <div class="col-3">
+                            <label>Amount</label>
+                        </div>
+                        <div class="col-2">
+                            <label>Delete</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" formArrayName="inggredients">
+                    <div class="row" 
+                    *ngFor="let inggredientCtrl of getControls(); let i=index"
+                    [formGroupName]="i" style="margin-top: 5px;">
+                        <div class="col-7">
+                            <input type="text" id="name" 
+                            class="form-control"
+                            formControlName="name">
+                        </div>
+                        <div class="col-3">
+                            <input type="number" id="amount" 
+                            class="form-control"
+                            formControlName="amount">
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-danger" type="button"
+                            (click)="onDeleteInggredient(i)">X</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-success" type="button" 
+                    (click)="onAddInggredient()">
+                        Add Inggredient
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-success" type="submit"
+                    [disabled]="!recipeForm.valid">
+                        Save
+                    </button>
+                    <button class="btn btn-danger" (click)="onCancel()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
